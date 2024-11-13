@@ -7,6 +7,7 @@ use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ChaveController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('chaves', ChaveController::class);
 });
 
+// Rotas de autenticação geradas pelo Laravel
+Auth::routes();
+
+// Rota adicional para home, caso não autenticado
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
