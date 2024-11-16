@@ -37,13 +37,27 @@ Route::middleware(['auth'])->group(function () {
 
     // Rotas para CRUD de Funcionários
     Route::resource('funcionarios', FuncionarioController::class);
-
+    Route::get('/funcionarios', [FuncionarioController::class, 'index'])->name('funcionarios.index');
+    Route::get('/funcionarios/create', [FuncionarioController::class, 'create'])->name('funcionarios.create');
+    Route::get('/funcionarios/{funcionario}', [FuncionarioController::class, 'show'])->name('funcionarios.show');
+    Route::post('/funcionarios', [FuncionarioController::class, 'store'])->name('funcionarios.store');
+    Route::get('/funcionarios/{funcionario}/edit', [FuncionarioController::class, 'edit'])->name('funcionarios.edit');
+    Route::put('/funcionarios/{funcionario}/update', [FuncionarioController::class, 'update'])->name('funcionarios.update');
+    Route::delete('/funcionarios/{funcionario}/destroy', [FuncionarioController::class, 'destroy'])->name('funcionarios.destroy');
+   
     // Rotas para CRUD de Departamentos
     Route::resource('departamentos', DepartamentoController::class);
 
     // Rotas para CRUD de Salas
     Route::resource('salas', SalaController::class);
-
+    Route::get('/salas', [SalaController::class, 'index'])->name('salas.index');
+    Route::get('/salas/create', [SalaController::class, 'create'])->name('salas.create');
+    Route::get('/salas/{sala}', [SalaController::class, 'show'])->name('salas.show');
+    Route::post('/salas', [SalaController::class, 'store'])->name('salas.store');
+    Route::get('/salas/{sala}/edit', [SalaController::class, 'edit'])->name('salas.edit');
+    Route::put('/salas/{sala}/update', [SalaController::class, 'update'])->name('salas.update');
+    Route::delete('/salas/{sala}/destroy', [SalaController::class, 'destroy'])->name('salas.destroy');
+    
     // Rotas para CRUD de Chaves
     Route::resource('chaves', ChaveController::class);
 });
