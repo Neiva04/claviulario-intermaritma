@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 class SalaController extends Controller
 {
     public function index(){
-        $salas = Sala::paginate(10); // Use paginação em vez de `all`
+        // Retorna a view de listagem de salas
+        $salas = Sala::paginate(10);
         return view('salas.index', ['salas' => $salas]);
     }
 
     public function edit(Sala $sala){
-        // Retorna a view de edição de um funcionário específico
+        // Retorna a view de edição de uma sala específica
         return view('salas.edit', ['sala'=>$sala]);
     }
 
@@ -23,7 +24,7 @@ class SalaController extends Controller
         // Busca todos os departamentos para exibir na lista de seleção
         $departamentos = Departamento::all();
     
-        // Retorna a view de criação de um novo funcionário, com a variável $departamentos
+        // Retorna a view de criação de uma nova sala, com a variável $departamentos
         return view('salas.create', compact('departamentos')); 
     }
 
@@ -34,7 +35,6 @@ class SalaController extends Controller
 
     public function store(Request $request){
         $data = $request->validate([
-            'id'=> 'required',
             'nome'=>'required',
             'numero'=> 'required',
             'departamentoID'=>'required',
@@ -46,9 +46,8 @@ class SalaController extends Controller
     
     
     public function update(Sala $sala, Request $request){
-        // Lógica para atualizar um funcionário específico
+        // Lógica para atualizar uma sala específica
         $data = $request->validate([
-            'id'=> 'required',
             'nome'=>'required',
             'numero'=> 'required',
             'departamentoID'=>'required',

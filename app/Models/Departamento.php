@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Departamento extends Model
 {
     use HasFactory;
+
+    // Permite que 'nome' seja preenchido em massa
+    protected $fillable = ['nome'];
 }
