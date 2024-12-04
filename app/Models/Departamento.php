@@ -11,4 +11,8 @@ class Departamento extends Model
 
     // Permite que 'nome' seja preenchido em massa
     protected $fillable = ['nome'];
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }

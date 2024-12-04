@@ -2,60 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-    public function index(){
-        // Retorna a view de listagem de departamentos
-        $departamentos = Departamento::paginate(10);
-        return view('departamentos.index', ['departamentos'=>$departamentos]);
+    public function index()
+    {
+        $departamentos = Departamento::paginate(10); // Plural ajustado
+        return view('departamentos.index', compact('departamentos'));
     }
 
-    public function create(){
-        // Busca todos os departamentos para exibir na lista de seleção
-        $departamentos = Departamento::all();
-    
-        // Retorna a view de criação de um novo departamento
-        return view('departamentos.create', compact('departamentos'));
+    public function create()
+    {
+        return view('departamentos.create');
     }
 
-    public function store(Request $request){
-        // Lógica para salvar um novo departamento no banco de dados
-       
+    public function store(Request $request)
+    {
         $data = $request->validate([
-                'nome'=>'required',
-                ]);
+            'nome' => 'required|max:255',
+        ]);
 
-        $newDepartamento = Departamento::create($data); 
-        return redirect()->route('departamentos.index')->with('success', 'Funcionário criado com sucesso!'); // Redireciona para a lista de funcionários
+        Departamento::create($data);
+        return redirect()->route('departamentos.index')->with('success', 'Departamento criado com sucesso!');
     }
 
-    public function show(Departamento $departamento){
-        // Retorna a view de visualização de um departamento específico
-        return view('departamentos.show', ['departamento'=>$departamento]);
+    public function show(Departamento $departamento)
+{
+    return view('departamentos.show', compact('departamento'));
+}
+
+    public function edit(Departamento $departamento)
+    {
+        return view('departamentos.edit', compact('departamento')); // Ajuste na variável
     }
 
-    public function edit(Departamento $departamento){
-        // Retorna a view de edição de um departamento específico
-        return view('departamentos.edit', ['departamentos'=>$departamento]);
-    }
-
-    public function update(Departamento $departamento, Request $request){
-        // Lógica para atualizar um departamento específico
+    public function update(Request $request, Departamento $departamento)
+    {
         $data = $request->validate([
-            'nome'=>'required',
-            ]);
+            'nome' => 'required|max:255',
+        ]);
 
         $departamento->update($data);
-        return redirect(route('departamentos.index'))->with('success', 'Product Updated Succesffully');
+        return redirect()->route('departamentos.index')->with('success', 'Departamento atualizado com sucesso!');
     }
 
-    public function destroy(Departamento $departamento){
-        // Lógica para deletar um departamento
+    public function destroy(Departamento $departamento)
+    {
         $departamento->delete();
-        return redirect(route('departamentos.index'))->with('success', 'Product Updated Succesffully');
+        return redirect()->route('departamentos.index')->with('success', 'Departamento deletado com sucesso!');
     }
 }

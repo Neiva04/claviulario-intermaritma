@@ -28,13 +28,13 @@
                     <td>{{ $chave->is_locado ? 'Sim' : 'Não' }}</td>
                     <td>{{ $chave->funcionario ? $chave->funcionario->nome : 'Nenhum' }}</td>
                     <td>
-                        <a class="btn btn-info" href="{{ route('chaves.show', $chave->id) }}">Ver</a>
-                        <a class="btn btn-primary" href="{{ route('chaves.edit', $chave->id) }}">Editar</a>
-                        <form action="{{ route('chaves.destroy', $chave->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Deletar</button>
-                        </form>
+                    <a class="btn btn-info" href="{{ route('chaves.show', $chave->id) }}">Ver</a>
+                    <a class="btn btn-primary" href="{{ route('chaves.edit', $chave->id) }}">Editar</a>
+                    <form action="{{ route('chaves.destroy', $chave->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
                     </td>
                 </tr>
                 @endforeach

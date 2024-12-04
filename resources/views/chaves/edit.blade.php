@@ -16,9 +16,9 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('chaves.update', $chave) }}" method="POST">
-                @csrf
-                @method('PUT')
+            <form action="{{ route('chaves.update', $chave->id) }}" method="POST">
+             @csrf
+            @method('PUT')
                 
                 <div class="form-group mt-3">
                     <label for="intermaritima_id">Identificador Intermaritima:</label>
@@ -80,13 +80,5 @@
     </div>
 </div>
 
-<script>
-    document.querySelector('#is_locado').addEventListener('change', function () {
-        const funcionarioSelect = document.querySelector('#funcionario_id');
-        funcionarioSelect.disabled = this.value === '0';
-        if (this.value === '0') {
-            funcionarioSelect.value = '';
-        }
-    });
-</script>
+
 @endsection

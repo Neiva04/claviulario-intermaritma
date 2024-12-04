@@ -9,7 +9,7 @@ use App\Models\Funcionario;
 use App\Models\Sala;
 
 class ChaveController extends Controller
-{
+{ 
     public function index(){
         // Retorna a view de listagem de chaves
         $chave = Chave::paginate(10);
@@ -47,7 +47,7 @@ class ChaveController extends Controller
         return view('chaves.show', compact('chave'));
     }
 
-
+    
     public function edit(Chave $chave) {
         $funcionarios = Funcionario::all();
         $salas = Sala::all();
