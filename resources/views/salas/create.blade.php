@@ -21,11 +21,16 @@
                 <div class="form-group mt-3">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" class="form-control" placeholder="Nome da Sala">
+                    @error('nome')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+               
                 <div class="form-group mt-3">
                     <label for="numero">Número:</label>
                     <input type="text" name="numero" class="form-control" placeholder="Número da Sala (opcional)">
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="departamento_id">Departamento:</label>
                     <select name="departamento_id" class="form-control">
@@ -33,6 +38,9 @@
                             <option value="{{ $departamento->id }}">{{ $departamento->nome }}</option>
                         @endforeach
                     </select>
+                    @error('departamento_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-success mt-3">Salvar</button>
             </form>

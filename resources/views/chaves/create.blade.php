@@ -21,6 +21,9 @@
                 <div class="form-group mt-3">
                     <label for="intermaritima_id">Identificador Intermaritima:</label>
                     <input type="text" name="intermaritima_id" class="form-control" placeholder="Identificador">
+                    @error('intermaritima_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="form-group mt-3">
@@ -30,6 +33,9 @@
                             <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
                         @endforeach
                     </select>
+                    @error('sala_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
               
                 <div class="form-group mt-3">
@@ -38,6 +44,9 @@
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
+                    @error('is_locado')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="form-group mt-3">
@@ -50,6 +59,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('funcionario_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <script>
                     document.querySelector('[name="is_locado"]').addEventListener('change', function () {

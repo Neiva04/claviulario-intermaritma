@@ -22,6 +22,9 @@
                 <div class="form-group mt-3">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" class="form-control" placeholder="Nome">
+                    @error('nome')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 
                 <button type="submit" class="btn btn-success mt-3">Salvar</button>
