@@ -23,19 +23,20 @@ class FuncionarioController extends Controller
     }
 
     public function store(Request $request){
-        // Lógica para salvar um novo funcionário no banco de dados
-       
+        // Exibe os dados recebidos do formulário
+        //dd($request->all());
+    
+        // Lógica para validar os dados e salvar no banco de dados
         $data = $request->validate([
-                'intermaritima_id'=> 'required',
-                'nome'=>'required',
-                'cargo'=> 'required',
-                'isAdmin'=> 'required',
-                'departamentoID'=>'required',
-                'departamento' => 'required',
-                ]);
-
+            'intermaritima_id' => 'required',
+            'nome' => 'required',
+            'cargo' => 'required',
+            'is_admin' => 'required',
+            'departamento_id' => 'required',
+        ]);
+    
         $newFuncionario = Funcionario::create($data); 
-        return redirect()->route('funcionarios.index')->with('success', 'Funcionário criado com sucesso!'); // Redireciona para a lista de funcionários
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário criado com sucesso!');
     }
 
     public function show(Funcionario $funcionario){
@@ -44,9 +45,13 @@ class FuncionarioController extends Controller
     }
 
     public function edit(Funcionario $funcionario){
-        // Retorna a view de edição de um funcionário específico
-        return view('funcionarios.edit', ['funcionario'=>$funcionario]);
+        // Busca todos os departamentos para preencher o dropdown
+        $departamentos = Departamento::all();
+    
+        // Retorna a view de edição com o funcionário e os departamentos
+        return view('funcionarios.edit', compact('funcionario', 'departamentos'));
     }
+    
 
     public function update(Funcionario $funcionario, Request $request){
         // Lógica para atualizar um funcionário específico
@@ -54,9 +59,8 @@ class FuncionarioController extends Controller
             'intermaritima_id'=> 'required',
             'nome'=>'required',
             'cargo'=> 'required',
-            'isAdmin'=> 'required',
-            'departamentoID'=>'required',
-            'departamento' => 'required',
+            'is_admin'=> 'required',
+            'departamento_id'=>'required',
             ]);
 
         $funcionario->update($data);

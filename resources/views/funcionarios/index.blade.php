@@ -26,7 +26,7 @@
                     <td>{{ $funcionario->intermaritima_id }}</td>
                     <td>{{ $funcionario->nome }}</td>
                     <td>{{ $funcionario->cargo }}</td>
-                    <td>{{ $funcionario->departamento->nome }}</td>
+                    <td>{{ $funcionario->departamento?->nome ?? 'Não atribuído' }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('funcionarios.show', $funcionario->id) }}">Ver</a>
                         <a class="btn btn-primary" href="{{ route('funcionarios.edit', $funcionario->id) }}">Editar</a>

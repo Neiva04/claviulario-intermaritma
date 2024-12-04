@@ -41,13 +41,25 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="funcionario_id">Funcionario:</label>
-                    <select name="funcionario_id" class="form-control">
+                    <label for="funcionario_id">Funcionário:</label>
+                    <select name="funcionario_id" class="form-control" id="funcionario_id" {{ old('is_locado') == '0' ? 'disabled' : '' }}>
+                        <option value="">Nenhum funcionário</option>
                         @foreach($funcionarios as $funcionario)
-                            <option value="{{ $funcionario->id }}">{{ $funcionario->nome }}</option>
+                            <option value="{{ $funcionario->id }}" {{ old('funcionario_id') == $funcionario->id ? 'selected' : '' }}>
+                                {{ $funcionario->nome }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
+                <script>
+                    document.querySelector('[name="is_locado"]').addEventListener('change', function () {
+                        const funcionarioSelect = document.getElementById('funcionario_id');
+                        funcionarioSelect.disabled = this.value === '0';
+                        if (this.value === '0') {
+                            funcionarioSelect.value = '';
+                        }
+                    });
+                </script>
                 
                 <button type="submit" class="btn btn-success mt-3">Salvar</button>
             </form>

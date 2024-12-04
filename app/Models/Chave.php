@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Chave extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'intermaritima_id',
+        'sala_id',
+        'is_locado',
+        'funcionario_id',
+    ];
+
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class);
+    }
+
+    public function sala()
+    {
+        return $this->belongsTo(Sala::class);
+    }
 }

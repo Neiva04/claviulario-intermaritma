@@ -20,33 +20,56 @@
                 @csrf
                 <div class="form-group mt-3">
                     <label for="intermaritima_id">Identificador Intermaritima:</label>
-                    <input type="text" name="intermaritima_id" class="form-control" placeholder="Identificador">
+                    <input type="text" name="intermaritima_id" class="form-control" placeholder="Identificador" value="{{ old('intermaritima_id') }}">
+                    @error('intermaritima_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Nome">
+                    <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ old('nome') }}">
+                    @error('nome')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="cargo">Cargo:</label>
-                    <input type="text" name="cargo" class="form-control" placeholder="Cargo">
+                    <input type="text" name="cargo" class="form-control" placeholder="Cargo" value="{{ old('cargo') }}">
+                    @error('cargo')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="departamento_id">Departamento:</label>
                     <select name="departamento_id" class="form-control">
                         @foreach($departamentos as $departamento)
-                            <option value="{{ $departamento->id }}">{{ $departamento->nome }}</option>
+                            <option value="{{ $departamento->id }}" {{ old('departamento_id') == $departamento->id ? 'selected' : '' }}>
+                                {{ $departamento->nome }}
+                            </option>
                         @endforeach
                     </select>
+                    @error('departamento_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="is_admin">É Admin?</label>
                     <select name="is_admin" class="form-control">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
+                        <option value="0" {{ old('is_admin') == '0' ? 'selected' : '' }}>Não</option>
+                        <option value="1" {{ old('is_admin') == '1' ? 'selected' : '' }}>Sim</option>
                     </select>
+                    @error('is_admin')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+                
                 <button type="submit" class="btn btn-success mt-3">Salvar</button>
             </form>
+
         </div>
     </div>
 </div>

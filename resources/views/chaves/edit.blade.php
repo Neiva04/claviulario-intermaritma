@@ -16,24 +16,77 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('chaves.update', $chave->id) }}" method="POST">
+            <form action="{{ route('chaves.update', $chave) }}" method="POST">
                 @csrf
                 @method('PUT')
+                
                 <div class="form-group mt-3">
                     <label for="intermaritima_id">Identificador Intermaritima:</label>
-                    <input type="text" name="intermaritima_id" class="form-control" value="{{ $chave->intermaritima_id }}">
+                    <input 
+                        type="text" 
+                        name="intermaritima_id" 
+                        class="form-control" 
+                        value="{{ old('intermaritima_id', $chave->intermaritima_id) }}"
+                        required
+                    >
                 </div>
+                
                 <div class="form-group mt-3">
                     <label for="sala_id">Sala:</label>
-                    <select name="sala_id" class="form-control">
+                    <select name="sala_id" class="form-control" required>
+                        <option value="" disabled {{ !$chave->sala_id ? 'selected' : '' }}>Selecione uma Sala</option>
                         @foreach($salas as $sala)
-                            <option value="{{ $sala->id }}" {{ $chave->sala_id == $sala->id ? 'selected' : '' }}>{{ $sala->nome }}</option>
+                            <option 
+                                value="{{ $sala->id }}" 
+                                {{ old('sala_id', $chave->sala_id) == $sala->id ? 'selected' : '' }}
+                            >
+                                {{ $sala->nome }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
+                
+                <div class="form-group mt-3">
+                    <label for="is_locado">Está alocado?</label>
+                    <select name="is_locado" class="form-control" id="is_locado" required>
+                        <option value="0" {{ old('is_locado', $chave->is_locado) == 0 ? 'selected' : '' }}>Não</option>
+                        <option value="1" {{ old('is_locado', $chave->is_locado) == 1 ? 'selected' : '' }}>Sim</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="funcionario_id">Funcionário:</label>
+                    <select 
+                        name="funcionario_id" 
+                        class="form-control" 
+                        id="funcionario_id" 
+                        {{ old('is_locado', $chave->is_locado) == 0 ? 'disabled' : '' }}
+                    >
+                        <option value="">Nenhum</option>
+                        @foreach($funcionarios as $funcionario)
+                            <option 
+                                value="{{ $funcionario->id }}" 
+                                {{ old('funcionario_id', $chave->funcionario_id) == $funcionario->id ? 'selected' : '' }}
+                            >
+                                {{ $funcionario->nome }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-success mt-3">Salvar</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelector('#is_locado').addEventListener('change', function () {
+        const funcionarioSelect = document.querySelector('#funcionario_id');
+        funcionarioSelect.disabled = this.value === '0';
+        if (this.value === '0') {
+            funcionarioSelect.value = '';
+        }
+    });
+</script>
 @endsection

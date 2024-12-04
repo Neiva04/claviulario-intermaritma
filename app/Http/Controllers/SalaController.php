@@ -16,8 +16,11 @@ class SalaController extends Controller
     }
 
     public function edit(Sala $sala){
-        // Retorna a view de edição de uma sala específica
-        return view('salas.edit', ['sala'=>$sala]);
+        // Busca todos os departamentos para preencher o dropdown
+        $departamentos = Departamento::all();
+    
+        // Retorna a view de edição com o funcionário e os departamentos
+        return view('salas.edit', compact('sala', 'departamentos'));
     }
 
     public function create(){
@@ -36,9 +39,8 @@ class SalaController extends Controller
     public function store(Request $request){
         $data = $request->validate([
             'nome'=>'required',
-            'numero'=> 'required',
-            'departamentoID'=>'required',
-            'departamento' => 'required',
+            'numero'=>'nullable',
+            'departamento_id'=>'required',
         ]);
         $newSala = Sala::create($data);
         return redirect()->route('salas.index')->with('success', 'Sala criada com sucesso!');
@@ -49,9 +51,8 @@ class SalaController extends Controller
         // Lógica para atualizar uma sala específica
         $data = $request->validate([
             'nome'=>'required',
-            'numero'=> 'required',
-            'departamentoID'=>'required',
-            'departamento' => 'required',
+            'numero'=>'nullable',
+            'departamento_id'=>'required',
             ]);
 
         $sala->update($data);

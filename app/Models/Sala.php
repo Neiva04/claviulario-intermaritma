@@ -10,6 +10,11 @@ class Sala extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'numero', 'departamento'
+        'nome', 'numero', 'departamento_id'
     ];
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_id');
+    }
 }

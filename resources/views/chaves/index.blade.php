@@ -24,9 +24,9 @@
                 <tr>
                     <td>{{ $chave->id }}</td>
                     <td>{{ $chave->intermaritima_id }}</td>
-                    <td>{{ $chave->sala->nome }}</td>
-                    <td>{{ $chave->is_locado }}</td>
-                    <td>{{ $chave->funcionario->nome }}</td>
+                    <td>{{ $chave->sala->nome}}</td>
+                    <td>{{ $chave->is_locado ? 'Sim' : 'Não' }}</td>
+                    <td>{{ $chave->funcionario ? $chave->funcionario->nome : 'Nenhum' }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('chaves.show', $chave->id) }}">Ver</a>
                         <a class="btn btn-primary" href="{{ route('chaves.edit', $chave->id) }}">Editar</a>
