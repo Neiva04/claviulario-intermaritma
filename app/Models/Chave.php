@@ -16,6 +16,8 @@ class Chave extends Model
         'funcionario_id',
     ];
 
+    protected $with = ['sala', 'funcionario'];
+
     public function funcionario()
     {
         return $this->belongsTo(Funcionario::class);

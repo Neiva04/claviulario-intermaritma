@@ -22,22 +22,31 @@ class ChaveController extends Controller
         return view('chaves.create', compact('funcionarios', 'salas'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
+        //dd($request->all());
+        
         $data = $request->validate([
             'intermaritima_id' => 'required',
             'sala_id' => 'required|exists:salas,id',
             'is_locado' => 'required|boolean',
             'funcionario_id' => 'nullable|required_if:is_locado,1|exists:funcionarios,id',
         ]);
+    
+        if (!$request->is_locado) {
+            $data['funcionario_id'] = null;
+        }
+    
         Chave::create($data);
-
+    
         return redirect()->route('chaves.index')->with('success', 'Chave criada com sucesso!');
     }
 
-    public function show(Chave $chave) {
-        $chave->load('sala', 'funcionario'); // Carrega os relacionamentos necessários
-        return view('chaves.show', ['chave'=>$chave]);
+    public function show($id){
+        $chave = Chave::with(['sala', 'funcionario'])->findOrFail($id);
+
+        return view('chaves.show', compact('chave'));
     }
+
 
     public function edit(Chave $chave) {
         $funcionarios = Funcionario::all();
@@ -45,7 +54,7 @@ class ChaveController extends Controller
         return view('chaves.edit', compact('chave', 'funcionarios', 'salas'));
     }
 
-    public function update(Chave $chave, Request $request) {
+    public function update(Request $request, Chave $chave) {
         $data = $request->validate([
             'intermaritima_id' => 'required',
             'sala_id' => 'required|exists:salas,id',
@@ -53,14 +62,20 @@ class ChaveController extends Controller
             'funcionario_id' => 'nullable|required_if:is_locado,1|exists:funcionarios,id',
         ]);
     
-        $chave->update($data);
+        if (!$request->is_locado) {
+            $data['funcionario_id'] = null;
+        }
     
+        $chave->update($data); 
         return redirect()->route('chaves.index')->with('success', 'Chave atualizada com sucesso!');
     }
 
-    public function destroy(Chave $chave){
-        // Lógica para deletar uma chave
-        $chave->delete();
-        return redirect(route('chaves.index'))->with('success', 'Chave deletada com sucesso');
+    public function destroy(Chave $chave) {
+        try {
+            $chave->delete();
+            return redirect()->route('chaves.index')->with('success', 'Chave deletada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('chaves.index')->with('error', 'Erro ao deletar chave: ' . $e->getMessage());
+        }
     }
 }

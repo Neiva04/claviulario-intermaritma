@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ $chave->id }}</td>
                     <td>{{ $chave->intermaritima_id }}</td>
-                    <td>{{ $chave->sala->nome}}</td>
+                    <td>{{ $chave->sala ? $chave->sala->nome : 'Não atribuída' }}</td>
                     <td>{{ $chave->is_locado ? 'Sim' : 'Não' }}</td>
                     <td>{{ $chave->funcionario ? $chave->funcionario->nome : 'Nenhum' }}</td>
                     <td>
