@@ -24,8 +24,17 @@ class DepartamentoController extends Controller
             'nome' => 'required|max:255',
         ]);
 
-        Departamento::create($data);
-        return redirect()->route('departamentos.index')->with('success', 'Departamento criado com sucesso!');
+        try {
+            Departamento::create($data);
+            return redirect()->route('departamentos.index')->with('success', 'Departamento criado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+                if ($exception->getCode() === '23000') { // Código para erro de chave duplicada
+                    return back()
+                        ->withErrors(['nome' => 'O nome informado já está em uso.'])
+                        ->withInput();
+                }
+                throw $exception; // Repassa outras exceções não tratadas
+            }
     }
 
     public function show(Departamento $departamento)
@@ -44,8 +53,19 @@ class DepartamentoController extends Controller
             'nome' => 'required|max:255',
         ]);
 
-        $departamento->update($data);
-        return redirect()->route('departamentos.index')->with('success', 'Departamento atualizado com sucesso!');
+        try {
+            // Tenta atualizar o funcionário
+            $departamento->update($data);
+            return redirect()->route('departamentos.index')->with('success', 'Departamento atualizado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            // Verifica se o erro é uma violação de chave única
+            if ($exception->getCode() === '23000') {
+                return back()->withErrors(['nome' => 'Já existe um departamento com este nome.'])->withInput();
+            }
+    
+            // Lança a exceção para outros erros não tratados
+            throw $exception;
+        }
     }
 
     public function destroy(Departamento $departamento)

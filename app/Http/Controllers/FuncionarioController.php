@@ -35,8 +35,17 @@ class FuncionarioController extends Controller
             'departamento_id' => 'required',
         ]);
     
-        $newFuncionario = Funcionario::create($data); 
-        return redirect()->route('funcionarios.index')->with('success', 'Funcionário criado com sucesso!');
+        try {
+            Funcionario::create($data);
+            return redirect()->route('funcionarios.index')->with('success', 'Funcionário criado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+                if ($exception->getCode() === '23000') { // Código para erro de chave duplicada
+                    return back()
+                        ->withErrors(['intermaritima_id' => 'O identificador informado já está em uso.'])
+                        ->withInput();
+                }
+                throw $exception; // Repassa outras exceções não tratadas
+            }
     }
 
     public function show(Funcionario $funcionario){
@@ -54,17 +63,28 @@ class FuncionarioController extends Controller
     
 
     public function update(Funcionario $funcionario, Request $request){
-        // Lógica para atualizar um funcionário específico
+        // Valida os dados do formulário
         $data = $request->validate([
-            'intermaritima_id'=> 'required',
-            'nome'=>'required',
-            'cargo'=> 'required',
-            'is_admin'=> 'required',
-            'departamento_id'=>'required',
-            ]);
-
-        $funcionario->update($data);
-        return redirect(route('funcionarios.index'))->with('success', 'Product Updated Succesffully');
+            'intermaritima_id' => 'required',
+            'nome' => 'required',
+            'cargo' => 'required',
+            'is_admin' => 'required',
+            'departamento_id' => 'required',
+        ]);
+    
+        try {
+            // Tenta atualizar o funcionário
+            $funcionario->update($data);
+            return redirect()->route('funcionarios.index')->with('success', 'Funcionário atualizado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            // Verifica se o erro é uma violação de chave única
+            if ($exception->getCode() === '23000') {
+                return back()->withErrors(['intermaritima_id' => 'Já existe um funcionário com este identificador.'])->withInput();
+            }
+    
+            // Lança a exceção para outros erros não tratados
+            throw $exception;
+        }
     }
 
     public function destroy(Funcionario $funcionario){

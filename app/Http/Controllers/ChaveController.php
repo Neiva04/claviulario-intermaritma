@@ -36,9 +36,17 @@ class ChaveController extends Controller
             $data['funcionario_id'] = null;
         }
     
-        Chave::create($data);
-    
-        return redirect()->route('chaves.index')->with('success', 'Chave criada com sucesso!');
+        try {
+            Chave::create($data);
+            return redirect()->route('chaves.index')->with('success', 'Chave criado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+                if ($exception->getCode() === '23000') { // Código para erro de chave duplicada
+                    return back()
+                        ->withErrors(['intermaritima_id' => 'O identificador informado já está em uso.'])
+                        ->withInput();
+                }
+                throw $exception; // Repassa outras exceções não tratadas
+            }
     }
 
     public function show($id){
@@ -66,8 +74,19 @@ class ChaveController extends Controller
             $data['funcionario_id'] = null;
         }
     
-        $chave->update($data); 
-        return redirect()->route('chaves.index')->with('success', 'Chave atualizada com sucesso!');
+        try {
+            // Tenta atualizar o funcionário
+            $chave->update($data);
+            return redirect()->route('chave.index')->with('success', 'Chave atualizado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            // Verifica se o erro é uma violação de chave única
+            if ($exception->getCode() === '23000') {
+                return back()->withErrors(['intermaritima_id' => 'Já existe uma chave com este identificador.'])->withInput();
+            }
+    
+            // Lança a exceção para outros erros não tratados
+            throw $exception;
+        }
     }
 
     public function destroy(Chave $chave) {
