@@ -77,7 +77,7 @@ class ChaveController extends Controller
         try {
             // Tenta atualizar o funcionário
             $chave->update($data);
-            return redirect()->route('chave.index')->with('success', 'Chave atualizado com sucesso!');
+            return redirect()->route('chaves.index')->with('success', 'Chave atualizado com sucesso!');
         } catch (\Illuminate\Database\QueryException $exception) {
             // Verifica se o erro é uma violação de chave única
             if ($exception->getCode() === '23000') {
