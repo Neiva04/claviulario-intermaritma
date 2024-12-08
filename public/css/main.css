@@ -1,0 +1,174 @@
+/* Resetando margens e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    background-image: url('/img/BackgroundL.png');
+    background-size: cover; /* Ajusta a imagem ao tamanho da tela */
+   
+    
+}
+
+/* Contêiner principal */
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Centraliza o texto */
+}
+
+.container-ajuste {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+.header {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Cards */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.centralize-card {
+    display: flex; /* Utiliza flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Garante que ocupa toda a altura da tela */
+    flex-direction: column; /* Alinha os itens em coluna */
+}
+
+
+.card {
+    width: fit-content; /* Ajusta a largura ao conteúdo */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    background-color: white; /* Cor de fundo */
+    border-radius: 8px; /* Cantos arredondados */
+    text-align: center; /* Centraliza o texto no card */
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-color: white;
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.button {
+    display: flex; /* Flexbox para o botão */
+    justify-content: center; /* Centraliza o texto no botão */
+    align-items: center; /* Alinha o texto verticalmente */
+    padding: 10px 20px; /* Ajusta o espaçamento interno */
+    background-color: #228B22;
+    color: white;
+    font-size: 1em; /* Ajusta o tamanho da fonte */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
+.button:hover {
+    background-color: #1a6d1a; 
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Garante duas colunas */
+    gap: 20px; /* Espaço entre os botões */
+    justify-content: center; /* Centraliza o grid no container */
+    align-items: center; /* Centraliza os botões verticalmente */
+    width: fit-content; /* Ajusta ao tamanho necessário */
+    margin: 0 auto; /* Centraliza no card */
+}
+
+
+
+.imagem-ajustada {
+    width: 70%;
+    height: auto;
+    max-width: 200px;
+    max-height: 100px   ;
+    margin: 0 auto; 
+}
+.actions {
+    display: flex;
+    justify-content: space-evenly; /* Espaçamento igual entre os botões */
+    align-items: center;          /* Alinha verticalmente os botões */
+    gap: 10px;                    /* Espaçamento opcional entre os itens */
+}
+
+.actions a,
+.actions button {
+    margin: 0 5px; /* Margem horizontal */
+}
+
+.form {
+    background-color: #006B38;
+    justify-content: center; /* Centraliza o grid no container */
+    align-items: center; /* Centraliza os botões verticalmente */
+    width: 50%; /* Ajusta ao tamanho necessário */
+    margin: 0 auto; /* Centraliza no card */
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.form .button {
+    border: none;
+    outline: none;
+    box-shadow: none;     
+}
+
+.data {
+    background-color: #006B38;
+    justify-content: center; /* Centraliza o grid no container */
+    align-items: center; /* Centraliza os botões verticalmente */
+    width: 30%; /* Ajusta ao tamanho necessário */
+    margin: 0 auto; /* Centraliza no card */
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: left;
+    margin-top: 20px;
+}

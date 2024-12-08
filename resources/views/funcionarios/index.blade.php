@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Lista de Funcionários</h2>
+            <h2 class="font-bold text-white">Lista de Funcionários</h2>
             <a class="btn btn-success" href="{{ route('funcionarios.create') }}"> Criar Novo Funcionário</a>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success mt-3">
@@ -27,7 +27,7 @@
                     <td>{{ $funcionario->nome }}</td>
                     <td>{{ $funcionario->cargo }}</td>
                     <td>{{ $funcionario->departamento?->nome ?? 'Não atribuído' }}</td>
-                    <td>
+                    <td class="actions align-middle justify-evenly">
                         <a class="btn btn-info" href="{{ route('funcionarios.show', $funcionario->id) }}">Ver</a>
                         <a class="btn btn-primary" href="{{ route('funcionarios.edit', $funcionario->id) }}">Editar</a>
                         <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST" style="display:inline;">

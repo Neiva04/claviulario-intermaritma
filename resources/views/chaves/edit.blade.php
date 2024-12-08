@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Editar Chave</h2>
+            <h2 class="font-bold text-white">Editar Chave</h2>
             <a class="btn btn-primary" href="{{ route('chaves.index') }}"> Voltar</a>
             @if ($errors->any())
                 <div class="alert alert-danger mt-3">
@@ -16,12 +16,12 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('chaves.update', $chave->id) }}" method="POST">
+            <form class="form" action="{{ route('chaves.update', $chave->id) }}" method="POST">
              @csrf
             @method('PUT')
                 
                 <div class="form-group mt-3">
-                    <label for="intermaritima_id">Identificador Intermaritima:</label>
+                    <label class="font-bold text-white" for="intermaritima_id">Identificador Intermaritima:</label>
                     <input 
                         type="text" 
                         name="intermaritima_id" 
@@ -32,7 +32,7 @@
                 </div>
                 
                 <div class="form-group mt-3">
-                    <label for="sala_id">Sala:</label>
+                    <label class="font-bold text-white" for="sala_id">Sala:</label>
                     <select name="sala_id" class="form-control" required>
                         <option value="" disabled {{ !$chave->sala_id ? 'selected' : '' }}>Selecione uma Sala</option>
                         @foreach($salas as $sala)
@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="form-group mt-3">
-                    <label for="is_locado">Está alocado?</label>
+                    <label class="font-bold text-white" for="is_locado">Está alocado?</label>
                     <select name="is_locado" class="form-control" id="is_locado" required>
                         <option value="0" {{ old('is_locado', $chave->is_locado) == 0 ? 'selected' : '' }}>Não</option>
                         <option value="1" {{ old('is_locado', $chave->is_locado) == 1 ? 'selected' : '' }}>Sim</option>
@@ -55,7 +55,7 @@
                 </div>
                 
                 <div class="form-group mt-3">
-                    <label for="funcionario_id">Funcionário:</label>
+                    <label class="font-bold text-white" for="funcionario_id">Funcionário:</label>
                     <select 
                         name="funcionario_id" 
                         class="form-control" 
@@ -74,7 +74,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-success mt-3">Salvar</button>
+                <button type="submit" class="button">Salvar</button>
             </form>
         </div>
     </div>

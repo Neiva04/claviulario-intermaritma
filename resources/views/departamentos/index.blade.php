@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Lista de Departamentos</h2>
+            <h2 class="font-bold text-white">Lista de Departamentos</h2>
             <a class="btn btn-success" href="{{ route('departamentos.create') }}"> Criar Novo Departamento</a>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success mt-3">
@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $departamento->id }}</td>
                     <td>{{ $departamento->nome }}</td>
-                    <td>
+                    <td class="actions align-middle justify-evenly">
                         <a class="btn btn-info" href="{{ route('departamentos.show', $departamento->id) }}">Ver</a>
                         <a class="btn btn-primary" href="{{ route('departamentos.edit', $departamento->id) }}">Editar</a>
                         <form action="{{ route('departamentos.destroy', $departamento->id) }}" method="POST" style="display:inline;">

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Editar Departamento</h2>
+            <h2 class="font-bold text-white">Editar Departamento</h2>
             <a class="btn btn-primary" href="{{ route('departamentos.index') }}"> Voltar</a>
             @if ($errors->any())
                 <div class="alert alert-danger mt-3">
@@ -16,15 +16,15 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('departamentos.update', $departamento->id) }}" method="POST">
+            <form class="form" action="{{ route('departamentos.update', $departamento->id) }}" method="POST">
                 @csrf
                 @method('PUT')  
                 <div class="form-group mt-3">
-                    <label for="nome">Nome:</label>
+                    <label class="font-bold text-white" for="nome">Nome:</label>
                     <input type="text" name="nome" class="form-control" value="{{ $departamento->nome }}">
                 </div>
               
-                <button type="submit" class="btn btn-success mt-3">Salvar</button>
+                <button type="submit" class="button">Salvar</button>
             </form>
         </div>
     </div>
