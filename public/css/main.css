@@ -21,15 +21,18 @@ body {
 .container {
     width: 90%;
     margin: auto;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     text-align: center; /* Centraliza o texto */
+    justify-content: center;
+    justify-items: center;
 }
 
 .container-ajuste {
-    width: 90%;
-    margin: auto;
-    padding: 20px;
+    display: flex; /* Habilita o Flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: calc(100vh - 100px); /* Ajusta a altura considerando o espaço para o cabeçalho */
 }
 
 /* Cabeçalho */
@@ -57,12 +60,13 @@ body {
 
 
 .card {
-    width: fit-content; /* Ajusta a largura ao conteúdo */
+    width: 100%; /* Largura adaptável */
+    max-width: 600px; /* Define uma largura máxima maior */
+    min-width: 400px; /* Garante uma largura mínima */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #fff; /* Cor de fundo */
     padding: 20px; /* Espaçamento interno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-    background-color: white; /* Cor de fundo */
-    border-radius: 8px; /* Cantos arredondados */
-    text-align: center; /* Centraliza o texto no card */
 }
 
 .card-header {
