@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Claviculário de Chaves - Sistema de Gerenciamento
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Sobre o Projeto
+Este é um sistema de claviculário de chaves desenvolvido para gerenciar de forma eficiente as chaves para empresa Intermarítima, bem como seus respectivos setores, como Funcionários, Salas e Departamentos. O projeto foi construído utilizando *PHP, o framework **Laravel* e o banco de dados *MySQL*.
 
-## About Laravel
+O sistema permite:
+- Administração de chaves;
+- Criação, edição e exclusão de setores;
+- Controle de acesso às informações.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Gerenciamento de Chaves
+- Cadastro de novas chaves;
+- Atualização de informações de chaves existentes;
+- Exclusão de chaves obsoletas;
+- Associação de chaves a salas e funcionários.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Gerenciamento de Funcionários
+- Cadastro de funcionários com dados básicos (identificador, nome, cargo, departamento associado);
+- Vinculação de funcionários a departamentos;
+- Permissão para acesso a determinadas chaves.
 
-## Learning Laravel
+### 3. Gerenciamento de Salas
+- Criação de salas com identificações únicas;
+- Atualização de dados de salas;
+- Exclusão de salas não mais utilizadas;
+- Controle das chaves atribuídas a cada sala.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 4. Gerenciamento de Departamentos
+- Cadastro de departamentos;
+- Edição e exclusão de departamentos;
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tecnologias Utilizadas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- *PHP*: Linguagem de programação para o backend;
+- *Laravel*: Framework PHP para desenvolvimento ágil e seguro;
+- *MySQL*: Banco de dados relacional para armazenamento das informações;
+- *HTML/CSS/JavaScript*: Para a interface do usuário;
+- *Blade*: Motor de templates do Laravel para renderização de views.
 
-## Laravel Sponsors
+## Requisitos
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP 8.0 ou superior;
+- Composer (para gerenciamento de dependências do Laravel);
+- MySQL 5.7 ou superior;
+- Node.js e npm (opcional, para gerenciamento de pacotes frontend).
 
-### Premium Partners
+## Configuração do Projeto
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. Clone o repositório para sua máquina local:
+   bash
+   git clone https://github.com/Neiva04/claviulario-intermaritma.git
+   
 
-## Contributing
+2. Acesse a pasta do projeto:
+   bash
+   cd seu-repositorio
+   
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Instale as dependências do Laravel:
+   bash
+   composer install
+   
 
-## Code of Conduct
+4. Configure o arquivo .env:
+   - Copie o arquivo de exemplo:
+     bash
+     cp .env.example .env
+     
+   - Configure as variáveis de ambiente, incluindo as credenciais do banco de dados.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Gere a chave da aplicação:
+   bash
+   php artisan key:generate
+   
 
-## Security Vulnerabilities
+6. Execute as migrações para criar as tabelas no banco de dados:
+   bash
+   php artisan migrate
+   
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. Inicie o servidor de desenvolvimento:
+   bash
+   php artisan serve
+   
+   O sistema estará acessível em [http://localhost:8000](http://localhost:8000).
 
-## License
+## Estrutura do Banco de Dados
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+O banco de dados possui as seguintes tabelas principais:
+- *chaves*: Armazena as informações das chaves;
+- *funcionarios*: Dados dos funcionários cadastrados;
+- *salas*: Informações sobre as salas;
+- *departamentos*: Detalhes dos departamentos.
+
+## Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+1. Realize um fork do repositório;
+2. Crie uma nova branch para suas modificações:
+   bash
+   git checkout -b minha-nova-feature
+   
+3. Envie suas alterações:
+   bash
+   git push origin minha-nova-feature
+   
+4. Abra um Pull Request.
