@@ -30,6 +30,7 @@ body {
 
 .container-ajuste {
     display: flex; /* Habilita o Flexbox */
+    width: auto;
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center; /* Centraliza verticalmente */
     height: calc(100vh - 100px); /* Ajusta a altura considerando o espaço para o cabeçalho */

@@ -74,6 +74,30 @@
                     </select>
                 </div>
 
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const isLocadoSelect = document.getElementById('is_locado');
+                        const funcionarioSelect = document.getElementById('funcionario_id');
+
+                        // Atualizar o estado do dropdown de Funcionário ao carregar a página
+                        toggleFuncionarioSelect(isLocadoSelect.value);
+
+                        // Adicionar evento de mudança ao dropdown de "Está alocado?"
+                        isLocadoSelect.addEventListener('change', function () {
+                            toggleFuncionarioSelect(this.value);
+                        });
+
+                        function toggleFuncionarioSelect(isLocado) {
+                            if (isLocado === '1') { // Habilita o campo quando está alocado
+                                funcionarioSelect.disabled = false;
+                            } else { // Desabilita o campo e reseta o valor quando não está alocado
+                                funcionarioSelect.disabled = true;
+                                funcionarioSelect.value = '';
+                            }
+                        }
+                    });
+                </script>
+
                 <button type="submit" class="button">Salvar</button>
             </form>
         </div>
